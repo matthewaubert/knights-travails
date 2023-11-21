@@ -1,0 +1,19 @@
+{
+  "name": "knights-travails",
+  "version": "1.0.0",
+  "description": "This repo was made as part of <a href=\"https://www.theodinproject.com/lessons/javascript-knights-travails\">The Odin Project: JavaScript course</a> in order to practice all that I've learned about data structures and algorithms.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "prettier": "3.1.0"
+  }
+}
