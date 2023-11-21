@@ -48,14 +48,16 @@ knightMoves([0,0],[7,7]) == [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
 
 ## Plan
 
-1. Project startup
+1. <a href="https://gist.github.com/matthewaubert/0d52f8d091566bf553491cc88e7e3ccb">Project startup</a>
 
-1. Research candidates for search algorithm, starting here: https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs
+1. Research "graph" data structure to use in the search algorithm, starting here: https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs
 
 1. Consider and plan how best to implement the chosen search algorithm
    - Do I need to create a `Node` class/factory?
-   - Do I need to create an algorithm class?
-   - What functions will I need to develop on the algorithm class?
-   - What helper functions might I need to develop to support the functions on the main algorithm class? (e.g. sorting algorithm, etc.)
+     - What properties will a `Node` instance need?
+   - Do I need to create a `Graph` class/factory?
+     - What properties will a `Graph` instance need?
+     - What functions will I need to develop on the `Graph` class?
+     - What helper functions might I need to develop to support the functions on the `Graph` class? (e.g. sorting algorithm, etc.)
    - How will I implement the `knightMoves` driver script?
    - What helper functions might I need to develop to support the `knightMoves` driver script?
