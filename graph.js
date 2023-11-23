@@ -28,22 +28,14 @@ export default class Graph {
     return vertices;
   }
 
-  // add a node/vertex to graph
-  // addVertex
-
-  // add edge btw two vertices
-  // addEdge
-
   // check whether there is an edge btw two vertices
   // isEdge
-
-  // printGraph
 }
 
-const board = new Graph();
-console.log('Number of vertices: ', board.numVertices);
-board.vertices.forEach((vertex, i) => {
-  console.log(i);
-  console.log('vertex coords', vertex.coords);
-  console.log(vertex.adjList);
-});
+// const board = new Graph();
+// console.log('Number of vertices: ', board.numVertices);
+// board.vertices.forEach((vertex) => {
+//   console.log(vertex.index);
+//   console.log('vertex coords', vertex.coords);
+//   console.log(vertex.adjList);
+// });
