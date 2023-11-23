@@ -50,14 +50,19 @@ knightMoves([0,0],[7,7]) == [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
 
 1. <a href="https://gist.github.com/matthewaubert/0d52f8d091566bf553491cc88e7e3ccb">Project startup</a>
 
-1. Research "graph" data structure to use in the search algorithm, starting here: https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs
+1. Research the "graph" data structure to use in the search algorithm. Resources I found to be helpful include:
+   - <a href="https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs">Khan Academy article</a>
+   - <a href="https://youtu.be/gXgEDyodOJU?si=cPWDp4XyNAcqz_9M">MyCodeSchool videos</a>
 
-1. Consider and plan how best to implement the chosen search algorithm
-   - Do I need to create a `Node` class/factory?
-     - What properties will a `Node` instance need?
+1. Consider and plan how best to implement the graph data structure
+   - Do I need to create a `Node`/`Vertex` class/factory?
+     - What properties will a `Node`/`Vertex` instance need?
+     - Consider that a valid knight's move is one in which the absolute value of the change in x and the absolute value of the change in y are 1 and 2 or 2 and 1, and in which the move is confined to the board (i.e. result is >= 0 and < 8)
    - Do I need to create a `Graph` class/factory?
      - What properties will a `Graph` instance need?
      - What functions will I need to develop on the `Graph` class?
      - What helper functions might I need to develop to support the functions on the `Graph` class? (e.g. sorting algorithm, etc.)
+
+1. Consider and plan how best to implement the chosen search algorithm
    - How will I implement the `knightMoves` driver script?
    - What helper functions might I need to develop to support the `knightMoves` driver script?
