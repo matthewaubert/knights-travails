@@ -9,7 +9,7 @@ export default class Vertex {
     this.coords = [x, y]; // e.g. [3, 3]
     this.adjList = Vertex.#buildAdjList(this.coords, gridSize);
     // e.g. [[1, 2], [1, 4], [2, 1], [2, 5], [4, 1], [4, 5], [5, 2], [5, 4]]
-    this.visited = false;
+    // this.visited = false;
   }
 
   static getIndex(x, y, gridSize) {

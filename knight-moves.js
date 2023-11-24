@@ -5,11 +5,19 @@ import Graph from './graph.js';
 // output: array of arrays of x, y coordinates of each square the knight will stop on along the way
 export default function knightMoves(startCoords, endCoords, gridSize = 8) {
   // create new Graph
-  const board = new Graph(gridSize);
+  const graph = new Graph(gridSize);
   // find start vertex
+  const startVertex = graph.find(startCoords);
   // find end vertex
-  const path = board.breadthFirstSearch(startVertex, endVertex);
-  console.log(path);
+  const endVertex = graph.find(endCoords);
+  const path = graph.breadthFirstSearch(startVertex, endVertex);
+  // while path stack > 0
+  while (path.length > 0) {
+    // pop square off path stack
+    const square = path.pop();
+    // print square coords
+    console.log(square.coords);
+  }
 }
 
 knightMoves([3, 3], [7, 7]);

@@ -32,8 +32,8 @@ export default class Graph {
   // isEdge
 
   // find and return vertex with given coordinates
-  find(coords) {
-    const index = Vertex.getIndex(...coords); // get index
+  find(coords, gridSize = 8) {
+    const index = Vertex.getIndex(...coords, gridSize); // get index
     return this.vertices[index];
   }
 
@@ -58,36 +58,74 @@ export default class Graph {
   // input: starting (root) vertex, ending (target) vertex
   // output: array of each step taken to traverse from root to target (inc. root and target)
   breadthFirstSearch(root, target) {
+    // console.log(root);
+    // console.log(target);
     // distance hash table
+    const dist = {};
     // prev hash table
+    const prev = {};
     // visited hash table
+    const visited = {};
   
     // for each vertex v
+    this.vertices.forEach(vertex => {
       // dist[v] = infinity
+      dist[vertex.index] = Infinity;
       // prev[v] = null
+      prev[vertex.index] = null;
       // visited[v] = false
+      visited[vertex.index] = false;
+    });
   
     // dist[root] = 0
+    dist[root.index] = 0;
     // let q be an empty queue
+    const q = [];
     // q.enqueue root
+    q.push(root);
+    // console.log(q);
   
     // while destination not visited
+    while (!visited[target.index]) {
       // v = q.dequeue
+      const vertex = q.shift();
+      // console.log(vertex);
       // visited[v] = true
+      visited[vertex.index] = true;
       // for each v adjacency w
+      vertex.adjList.forEach(coords => {
+        // find vertex by coords
+        const adj = this.find(coords);
         // if dist[v] + 1 < dist[w]
+        if (dist[vertex.index] + 1 < dist[adj.index]) {
           // q.enqueue w
+          q.push(adj);
           // prev[w] = v
+          prev[adj.index] = vertex;
           // dist[w] = dist[prev[w]] + 1
+          dist[adj.index] = dist[prev[adj.index].index] + 1
+        }
+      });
+    }
   
     // let s be an empty stack
+    const path = [];
+    // path.push target
+    path.push(target);
+
     // once target is visited, trace back to root by following prev vertices
     // let v = target
+    let vertex = target;
     // while v != root
-      // s.push target
+    while (vertex.index !== root.index) {
       // v = prev[v]
+      vertex = prev[vertex.index];
+      // s.push target
+      path.push(vertex);
+    }
   
     // return s
+    return path;
   }
 }
 
