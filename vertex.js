@@ -1,15 +1,15 @@
 // create a new vertex for a graph
 // input: x, y coordinates, grid size
 // properties:
-  // coords: array of x, y coordinates of vertex position
-  // adjList: array of arrays of valid x, y coordinates a knight could move to
+//   coords: array of x, y coordinates of vertex position
+//   adjList: array of arrays of valid x, y coordinates a knight could move to
 export default class Vertex {
   constructor(x, y, gridSize) {
     this.index = Vertex.getIndex(x, y, gridSize);
     this.coords = [x, y]; // e.g. [3, 3]
     this.adjList = Vertex.#buildAdjList(this.coords, gridSize);
     // e.g. [[1, 2], [1, 4], [2, 1], [2, 5], [4, 1], [4, 5], [5, 2], [5, 4]]
-    this.explored = false;
+    this.visited = false;
   }
 
   static getIndex(x, y, gridSize) {

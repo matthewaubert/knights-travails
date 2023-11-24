@@ -63,7 +63,8 @@ knightMoves([0,0],[7,7]) == [[0,0],[2,1],[4,2],[6,3],[7,5],[5,6],[7,7]]
      - What functions will I need to develop on the `Graph` class?
      - What helper functions might I need to develop to support the functions on the `Graph` class? (e.g. sorting algorithm, etc.)
 
-1. Consider and plan which search algorithm to use (Dijkstra's)
+1. Consider and plan which search algorithm to use
+   - I will use the breadth-first search algorithm (i.e. a special-case of Dijkstra's Algorithm on unweighted graphs, in which the priority queue degenerates into a first-in-first-out queue) in order to find the smallest number of edges between start and end vertices
 
 1. Consider and plan how best to implement the chosen search algorithm
    - How will I implement the `knightMoves` driver script?
