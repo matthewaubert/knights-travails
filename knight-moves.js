@@ -11,6 +11,12 @@ export default function knightMoves(startCoords, endCoords, gridSize = 8) {
   // find end vertex
   const endVertex = graph.find(endCoords);
   const path = graph.breadthFirstSearch(startVertex, endVertex);
+
+  // paths.forEach((path, i) => {
+  //   console.log(i);
+  //   console.log(path);
+  // });
+
   // while path stack > 0
   while (path.length > 0) {
     // pop square off path stack
@@ -20,4 +26,4 @@ export default function knightMoves(startCoords, endCoords, gridSize = 8) {
   }
 }
 
-knightMoves([3, 3], [7, 7]);
+knightMoves([3, 3], [4, 3]);
