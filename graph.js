@@ -2,12 +2,9 @@ import Vertex from './vertex.js';
 
 // create new graph
 // input: grid size (defaults to 8, the size of a chess board)
-// properties:
-//   numVertices: number of vertices
-//   vertices: array of vertices, each with coordinates and an adjacency list
+// property: array of vertices, each with coordinates and an adjacency list
 export default class Graph {
   constructor(gridSize = 8) {
-    this.numVertices = gridSize ** 2;
     this.vertices = Graph.#buildGraph(gridSize);
   }
 
@@ -49,8 +46,8 @@ export default class Graph {
       const vertex = q.shift(); // current vertex = q.dequeue
       visited[vertex.index] = true; // mark current vertex as visited
       // for each vertex adjacency
-      vertex.adjList.forEach((coords) => {
-        const adj = this.find(coords); // find vertex by coords
+      vertex.adjList.forEach((adjIndex) => {
+        const adj = this.vertices[adjIndex]; // find adjacency by index
         // if vertex dist + 1 < adjacency dist
         if (dist[vertex.index] + 1 < dist[adj.index]) {
           q.push(adj); // q.enqueue adjacency

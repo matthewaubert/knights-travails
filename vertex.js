@@ -2,14 +2,13 @@
 // input: x, y coordinates, grid size
 // properties:
 //   coords: array of x, y coordinates of vertex position
-//   adjList: array of arrays of valid x, y coordinates a knight could move to
+//   adjList: array of adjacency indices a knight could move to
 export default class Vertex {
   constructor(x, y, gridSize) {
     this.index = Vertex.getIndex(x, y, gridSize);
     this.coords = [x, y]; // e.g. [3, 3]
     this.adjList = Vertex.#buildAdjList(this.coords, gridSize);
-    // e.g. [[1, 2], [1, 4], [2, 1], [2, 5], [4, 1], [4, 5], [5, 2], [5, 4]]
-    // this.visited = false;
+    // e.g. [10, 12, 17, 21, 33, 37, 42, 44]
   }
 
   static getIndex(x, y, gridSize) {
@@ -24,11 +23,16 @@ export default class Vertex {
     const adjList = [];
     // for each delta
     Vertex.#deltas.forEach((delta) => {
-      // create adjacency by adding delta values to coords values of same index
-      const adj = [vertexCoords[0] + delta[0], vertexCoords[1] + delta[1]];
+      // create adjacency index
+      // by adding delta values to coords values and finding index
+      const adjIndex = Vertex.getIndex(
+        vertexCoords[0] + delta[0],
+        vertexCoords[1] + delta[1],
+        gridSize,
+      );
 
-      // if both adjacency values are valid, push to adjList
-      if (Vertex.#isAdjValid(adj, gridSize)) adjList.push(adj);
+      // if adjacency index is valid, push to adjList
+      if (Vertex.#isAdjValid(adjIndex, gridSize)) adjList.push(adjIndex);
     });
 
     return adjList;
@@ -47,12 +51,10 @@ export default class Vertex {
   ];
 
   // return boolean value whether given adjacency's
-  // x, y coordinates are valid given grid size
-  static #isAdjValid(adj, gridSize) {
-    for (let i = 0; i < adj.length; i++) {
-      if (adj[i] < 0 || adj[i] >= gridSize) return false;
-    }
+  // index is valid given grid size
+  static #isAdjValid(adjIndex, gridSize) {
+    if (adjIndex >= 0 && adjIndex < gridSize ** 2) return true;
 
-    return true;
+    return false;
   }
 }
