@@ -4,7 +4,7 @@ This repo was made as part of <a href="https://www.theodinproject.com/lessons/ja
 
 ## Assignment
 
-Build a function `knightMoves` that shows the shortest possible way, in chess, for a knight to get from one square to another by outputting the coordinates of all squares it would stop on along the way.
+Build a function `knightMoves` that shows the shortest possible path, in chess, for a knight to get from one square to another by outputting the coordinates of all squares it would stop on along the way.
 
 For example:
 ```
