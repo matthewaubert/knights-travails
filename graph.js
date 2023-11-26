@@ -36,20 +36,11 @@ export default class Graph {
 
   // find shortest path between starting vertex and ending vertex
   // input: starting (root) vertex, ending (target) vertex
-  // output: array of each step taken to traverse from root to target in reverse (inc. root and target)
+  // output: array (stack) of each step taken to traverse from root to target in reverse (inc. root and target)
   breadthFirstSearch(root, target) {
-    const dist = {}; // distance hash table
-    const prev = {}; // previous hash table
-    const visited = {}; // visited hash table
+    // init dis, prev, visited hash tables
+    const { dist, prev, visited } = this.#initBfsTables(root);
 
-    // for each vertex
-    this.vertices.forEach((vertex) => {
-      dist[vertex.index] = Infinity; // set dist to Infinity
-      prev[vertex.index] = null; // set prev to null
-      visited[vertex.index] = false; // set visited to false
-    });
-
-    dist[root.index] = 0; // set root dist to 0
     const q = []; // init empty queue
     q.push(root); // q.enqueue root
 
@@ -70,6 +61,30 @@ export default class Graph {
     }
 
     // once target is visited, trace back to root by following prev vertices
+    return Graph.#traceBack(root, target, prev);
+  }
+
+  // initialize and return distance, previous, visited hash tables for breadth-first search
+  #initBfsTables(root) {
+    const dist = {}; // distance hash table
+    const prev = {}; // previous hash table
+    const visited = {}; // visited hash table
+
+    // for each vertex
+    this.vertices.forEach((vertex) => {
+      dist[vertex.index] = Infinity; // set dist to Infinity
+      prev[vertex.index] = null; // set prev to null
+      visited[vertex.index] = false; // set visited to false
+    });
+
+    dist[root.index] = 0; // set root dist to 0
+
+    return { dist, prev, visited };
+  }
+
+  // use given prev hash table to trace from target back to root
+  // and return array (stack) of each step taken to traverse from root to target in reverse (inc. root and target)
+  static #traceBack(root, target, prev) {
     const path = []; // init empty stack
     path.push(target); // push target to stack
     let vertex = target; // set vertex to target
