@@ -14,7 +14,7 @@ export default function knightMoves(startCoords, endCoords, gridSize = 8) {
   printPath(startCoords, endCoords, path);
 }
 
-// print results 
+// print to console given path found by breadth-first search
 function printPath(startCoords, endCoords, path) {
   console.log(`> knightMoves([${startCoords}],[${endCoords}])`);
   console.log(`=> You made it in ${path.length - 1} moves! Here's your path:`);

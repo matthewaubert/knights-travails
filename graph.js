@@ -28,111 +28,58 @@ export default class Graph {
     return vertices;
   }
 
-  // check whether there is an edge btw two vertices
-  // isEdge
-
   // find and return vertex with given coordinates
   find(coords, gridSize = 8) {
     const index = Vertex.getIndex(...coords, gridSize); // get index
     return this.vertices[index];
   }
 
-  // binary search algorithm
-  static #binarySearch(array, targetIndex, start = 0, end = array.length - 1) {
-    // base case: if array is size 0, return null (not found)
-    if (array.length < 0) return null;
-
-    // calculate mid point of array
-    const mid = end / 2;
-    // if target found at mid, return target
-    if (array[mid].index === targetIndex) return array[mid];
-    // recursive step: else if target < mid, set end point to mid - 1 and repeat
-    else if (targetIndex < mid)
-      return Graph.#binarySearch(array, targetIndex, start, mid - 1);
-    // recursive step: else if target > mid, set start point to mid + 1 and repeat
-    else if (targetIndex > mid)
-      return Graph.#binarySearch(array, targetIndex, mid + 1, end);
-  }
-
-  // find shortest paths between starting vertex and ending vertex
+  // find shortest path between starting vertex and ending vertex
   // input: starting (root) vertex, ending (target) vertex
-  // output: array of each step taken to traverse from root to target (inc. root and target)
+  // output: array of each step taken to traverse from root to target in reverse (inc. root and target)
   breadthFirstSearch(root, target) {
-    // console.log(root);
-    // console.log(target);
-    // distance hash table
-    const dist = {};
-    // prev hash table
-    const prev = {};
-    // visited hash table
-    const visited = {};
-  
-    // for each vertex v
-    this.vertices.forEach(vertex => {
-      // dist[v] = infinity
-      dist[vertex.index] = Infinity;
-      // prev[v] = null
-      prev[vertex.index] = null;
-      // visited[v] = false
-      visited[vertex.index] = false;
+    const dist = {}; // distance hash table
+    const prev = {}; // previous hash table
+    const visited = {}; // visited hash table
+
+    // for each vertex
+    this.vertices.forEach((vertex) => {
+      dist[vertex.index] = Infinity; // set dist to Infinity
+      prev[vertex.index] = null; // set prev to null
+      visited[vertex.index] = false; // set visited to false
     });
-  
-    // dist[root] = 0
-    dist[root.index] = 0;
-    // let q be an empty queue
-    const q = [];
-    // q.enqueue root
-    q.push(root);
-    // console.log(q);
-  
+
+    dist[root.index] = 0; // set root dist to 0
+    const q = []; // init empty queue
+    q.push(root); // q.enqueue root
+
     // while destination not visited
     while (!visited[target.index]) {
-      // v = q.dequeue
-      const vertex = q.shift();
-      // console.log(vertex);
-      // visited[v] = true
-      visited[vertex.index] = true;
-      // for each v adjacency w
-      vertex.adjList.forEach(coords => {
-        // find vertex by coords
-        const adj = this.find(coords);
-        // if dist[v] + 1 < dist[w]
+      const vertex = q.shift(); // current vertex = q.dequeue
+      visited[vertex.index] = true; // mark current vertex as visited
+      // for each vertex adjacency
+      vertex.adjList.forEach((coords) => {
+        const adj = this.find(coords); // find vertex by coords
+        // if vertex dist + 1 < adjacency dist
         if (dist[vertex.index] + 1 < dist[adj.index]) {
-          // q.enqueue w
-          q.push(adj);
-          // prev[w] = v
-          prev[adj.index] = vertex;
-          // dist[w] = dist[prev[w]] + 1
-          dist[adj.index] = dist[prev[adj.index].index] + 1
+          q.push(adj); // q.enqueue adjacency
+          prev[adj.index] = vertex; // set adj prev to vertex
+          dist[adj.index] = dist[vertex.index] + 1; // set adj dist to vertex dist + 1
         }
       });
     }
-  
-    // let s be an empty stack
-    const path = [];
-    // path.push target
-    path.push(target);
 
     // once target is visited, trace back to root by following prev vertices
-    // let v = target
-    let vertex = target;
-    // while v != root
+    const path = []; // init empty stack
+    path.push(target); // push target to stack
+    let vertex = target; // set vertex to target
+
+    // while vertex != root
     while (vertex.index !== root.index) {
-      // v = prev[v]
-      vertex = prev[vertex.index];
-      // s.push target
-      path.push(vertex);
+      vertex = prev[vertex.index]; // set vertex to its prev
+      path.push(vertex); // push vertex to stack
     }
-  
-    // return s
+
     return path;
   }
 }
-
-// const board = new Graph();
-// console.log('Number of vertices: ', board.numVertices);
-// board.vertices.forEach((vertex) => {
-//   console.log(vertex.index);
-//   console.log('vertex coords', vertex.coords);
-//   console.log(vertex.adjList);
-// });
